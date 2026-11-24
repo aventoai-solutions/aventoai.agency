@@ -73,7 +73,7 @@ def nav(current):
 def footer(h2, line):
     f = FOOTER.replace('<a href="#faq">Questions</a>', '<a href="/#faq">Questions</a>')
     f = re.sub(r'<h2 id="close-h">.*?</h2>', f'<h2 id="close-h">{h2}</h2>', f, 1, flags=re.S)
-    f = re.sub(r'(<h2 id="close-h">.*?</h2>\s*<p>).*?(</p>)', lambda m: m.group(1) + line + m.group(2), f, count=1, flags=re.S)
+    f = re.sub(r'(<h2 id="close-h">.*?</h2>\s*<p[^>]*>).*?(</p>)', lambda m: m.group(1) + line + m.group(2), f, count=1, flags=re.S)
     return f
 
 
@@ -238,122 +238,151 @@ page('/services/', 'services/index.html', 'Services: AI automation, websites and
 
 # ---------------------------------------------------------------- WORK
 PROJECTS = [
-    ('web', 'realestate', 'Prime Property', 'Web Development · Real Estate', 'A real estate platform built to showcase premium properties and generate qualified leads.', 'React · Next.js · CRM API', 'https://luxury-real-estate-showcase-lemon.vercel.app/'),
-    ('ecom', 'ecommerce', 'Modern E-commerce Store', 'E-commerce · Retail and Fashion', 'A high-converting online store with a modern, responsive shopping experience.', 'Shopify · Stripe · Liquid', 'https://fashion-ecommerce-store-eight.vercel.app/'),
-    ('ai', 'ai-support', 'AI Customer Support', 'AI Automation · Customer Experience', 'An AI support system that responds to customers and collects leads automatically.', 'OpenAI · Python · WhatsApp API', 'https://realsupport-ai.vercel.app/'),
-    ('systems', 'dashboard', 'Business Dashboard', 'Business Systems · Operations', 'A custom dashboard for managing customers, analytics and daily operations.', 'React · Node.js · PostgreSQL', 'https://real-showcase.vercel.app/'),
-    ('uiux web', 'restaurant', 'Restaurant Website', 'UI/UX · Hospitality', 'A restaurant website with menu display, reservations and location integration.', 'React · Maps API · Reservations', 'https://restaurant-website-zeta-rosy.vercel.app/'),
-    ('web', 'dentist', 'Dental Clinic Website', 'Web Development · Healthcare and Dental', 'Online appointment booking, treatment pages and patient enquiry automation.', 'Next.js · Booking API · GA4', 'https://smile-book-pro.vercel.app/'),
-    ('systems ai', 'garage', 'Avento GarageOS', 'Business Systems · Car Garages', 'Customers, vehicles, jobs, invoices, appointments and stock in one system, with AI reminders and follow-ups.', 'Next.js · React · PostgreSQL · AI', 'https://smart-garage-flow.vercel.app/'),
+    ('garage', 'Avento GarageOS', 'Business system · Car garages', 'Customers, vehicles, job cards, invoices, appointments and stock in one system, with AI reminders that bring customers back.', 'Next.js · React · PostgreSQL · AI', 'https://smart-garage-flow.vercel.app/'),
+    ('realestate', 'Prime Property', 'Website · Real estate', 'A real estate platform that shows premium listings and turns visits into qualified leads, synced to the CRM.', 'React · Next.js · CRM API', 'https://luxury-real-estate-showcase-lemon.vercel.app/'),
+    ('ai-support', 'AI Customer Support', 'AI automation · Customer experience', 'An AI assistant that answers customers on WhatsApp and the website, collects leads and hands over to the team.', 'OpenAI · Python · WhatsApp API', 'https://realsupport-ai.vercel.app/'),
+    ('ecommerce', 'Modern E-commerce Store', 'E-commerce · Retail and fashion', 'A Shopify store with a fast, responsive shopping experience and card payments built in.', 'Shopify · Stripe · Liquid', 'https://fashion-ecommerce-store-eight.vercel.app/'),
+    ('dashboard', 'Business Dashboard', 'Business system · Operations', 'A custom dashboard for customers, analytics and daily operations, in one screen.', 'React · Node.js · PostgreSQL', 'https://real-showcase.vercel.app/'),
+    ('restaurant', 'Restaurant Website', 'UI/UX · Hospitality', 'Menu, reservations and location in one website that books tables.', 'React · Maps API · Reservations', 'https://restaurant-website-zeta-rosy.vercel.app/'),
+    ('dentist', 'Dental Clinic Website', 'Website · Healthcare and dental', 'Online appointment booking, treatment pages and patient enquiry automation.', 'Next.js · Booking API · GA4', 'https://smile-book-pro.vercel.app/'),
 ]
 
-cards = ''
-for cat, img, name, kind, line, stack, url in PROJECTS:
-    cards += f'''        <a class="card card--row card--open span-4 proj" data-cat="{cat}" href="{url}" target="_blank" rel="noopener">
-          <p class="t-label muted">{kind}</p>
-          <h3>{name if name.endswith('Website') else name + ' website'}</h3>
-          <p>{line}</p>
-          <div class="panel"><img class="frame__img" src="/images/shots/{img}.webp" alt="{name}, built by Avento AI" loading="lazy" decoding="async" width="1440" height="900" data-source="client" data-subject="website"></div>
-          <p class="proj__stack">{stack}</p>
-        </a>
-'''
-cards = cards.replace('span-4 proj" data-cat="systems ai"', 'span-8 proj proj--wide" data-cat="systems ai"')
-cards += '''        <a class="card card--row card--open span-4 proj proj--next" data-cat="web ai ecom systems uiux" href="/about/#contact">
-          <p class="t-label muted">Your business · Dubai</p>
-          <h3>Your project next</h3>
-          <p>Tell us what you want to build. We reply with a clear plan, usually within one business day.</p>
-          <div class="panel"><div class="next-tools" aria-hidden="true">
-            <span class="ic-tile"><img class="ic" src="/assets/icons/whatsapp.svg" alt="" width="28" height="28"></span>
-            <span class="ic-tile"><img class="ic" src="/assets/icons/shopify.svg" alt="" width="28" height="28"></span>
-            <span class="ic-tile"><img class="ic" src="/assets/icons/openai.svg" alt="" width="28" height="28"></span>
-            <span class="ic-tile"><img class="ic" src="/assets/icons/instagram.svg" alt="" width="28" height="28"></span>
-            <span class="ic-tile"><img class="ic" src="/assets/icons/google-sheets.svg" alt="" width="28" height="28"></span>
-            <span class="ic-tile"><img class="ic" src="/assets/icons/slack.svg" alt="" width="28" height="28"></span>
-          </div></div>
-          <p class="proj__stack">Start with a free audit</p>
-        </a>
-'''
-cards = cards.replace('Avento GarageOS website', 'Avento GarageOS system').replace('AI Customer Support website', 'AI Customer Support system').replace('Business Dashboard website', 'Business Dashboard system').replace('Modern E-commerce Store website', 'Modern E-commerce Store')
 
-INBOX = '''<div class="panel"><div class="stage stage--fade-b"><div class="at-rise fit" style="--fit-max:420px;--ax:max(24px, 50% - 210px);--ay:48px;--ay-sm:20px" data-ui-loop>
-  <div class="ui ui-panel ui-checks" data-ui="checklist">
-    <div class="ui-checks__head"><div class="ui-title">Leads inbox · Instagram DM</div><span class="ui-spacer"></span><div class="ui-meta" data-checks-count>2 of 6</div></div>
-    <div class="ui-checks__bar"><i data-checks-bar style="--k:0.33"></i></div>
-    <ul class="ui-checks__list">
-      <li class="ui-check is-done">''' + CHECK + '''<span class="ui-check__label">New enquiry: "What are your prices?"</span></li>
-      <li class="ui-check is-done">''' + CHECK + '''<span class="ui-check__label">Qualified lead, score 92 of 100</span></li>
-      <li class="ui-check">''' + CHECK + '''<span class="ui-check__label">Added to the CRM, owner assigned</span></li>
-      <li class="ui-check">''' + CHECK + '''<span class="ui-check__label">WhatsApp follow-up delivered in 2 s</span></li>
-      <li class="ui-check">''' + CHECK + '''<span class="ui-check__label">Appointment booked, tomorrow 11:00</span></li>
-      <li class="ui-check">''' + CHECK + '''<span class="ui-check__label">Sales team notified</span></li>
-    </ul>
-  </div>
-</div></div></div>'''
+def chapter(img, name, kind, line, stack, url):
+    host = url.split('//')[1].rstrip('/')
+    return (f'          <li class="mo-pc__step">\n'
+            f'            <h3>{name}</h3>\n'
+            f'            <p><span class="t-label muted">{kind}</span><br>{line} <a class="link" href="{url}" target="_blank" rel="noopener">Open the live site</a></p>\n'
+            f'            <figure class="mo-pc__visual"><div class="shotwin shotwin--fill"><div class="shot-bar"><span class="d-win__dots"><i></i><i></i><i></i></span><span>{host}</span><span class="shot-stack">{stack}</span></div>'
+            f'<img class="shotwin__img" src="/images/shots/{img}.webp" alt="{name}, built by Avento AI" width="1440" height="900" data-source="client" data-subject="project"></div></figure>\n'
+            f'          </li>\n')
 
-work_body = hero('Our work', 'Websites, stores and AI systems we have built',
-    'Explore the websites, digital platforms and automation we have created for real estate, retail, hospitality, healthcare and garages. Every project below is live.',
-    shot('garage', 'Avento GarageOS, a garage management system built by Avento AI', 'https://smart-garage-flow.vercel.app/'), ('See all projects', '#projects'))
-work_body += f'''  <section class="section" id="projects" style="--h: 2" aria-labelledby="projects-h">
+
+rows = ''
+frames = ''
+for n, (img, name, kind, line, stack, url) in enumerate(PROJECTS, 1):
+    hidden = '' if n == 1 else ' hidden'
+    rows += (f'            <li data-peek-to="p{n}" tabindex="0">\n'
+             f'              <span class="idx__n">{n:02d}</span>\n'
+             f'              <span class="idx__name"><a href="{url}" target="_blank" rel="noopener">{name}</a></span>\n'
+             f'              <span class="idx__kind">{kind}</span>\n'
+             f'              <span class="idx__tech">{stack.split(" · ")[0]}</span>\n'
+             f'            </li>\n')
+    frames += (f'            <img class="frame__img" data-peek-for="p{n}" src="/images/shots/{img}.webp" alt="{name}, built by Avento AI" '
+               f'loading="lazy" decoding="async" width="1440" height="900" data-source="client" data-subject="project"{hidden}>\n')
+
+INBOX = ('<div class="panel"><div class="stage stage--fade-b"><div class="at-rise fit" style="--fit-max:420px;--ax:max(24px, 50% - 210px);--ay:48px;--ay-sm:20px" data-ui-loop>\n'
+         '  <div class="ui ui-panel ui-checks" data-ui="checklist">\n'
+         '    <div class="ui-checks__head"><div class="ui-title">Leads inbox · Instagram DM</div><span class="ui-spacer"></span><div class="ui-meta" data-checks-count>2 of 6</div></div>\n'
+         '    <div class="ui-checks__bar"><i data-checks-bar style="--k:0.33"></i></div>\n'
+         '    <ul class="ui-checks__list">\n'
+         + ''.join(f'      <li class="ui-check{done}">{CHECK}<span class="ui-check__label">{t}</span></li>\n' for done, t in [
+             (' is-done', 'New enquiry: "What are your prices?"'), (' is-done', 'Qualified lead, score 92 of 100'),
+             ('', 'Added to the CRM, owner assigned'), ('', 'WhatsApp follow-up delivered in 2 s'),
+             ('', 'Appointment booked, tomorrow 11:00'), ('', 'Sales team notified')]) +
+         '    </ul>\n  </div>\n</div></div></div>')
+
+work_body = f'''  <section class="hero hero--work" data-enter aria-labelledby="hero-h">
     <div class="wrap">
-      <div class="section-head">
-        <h2 id="projects-h">Seven live projects</h2>
-        <div class="filters" role="group" aria-label="Filter projects">
-          <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
-          <button class="filter" type="button" data-filter="web" aria-pressed="false">Web</button>
-          <button class="filter" type="button" data-filter="ai" aria-pressed="false">AI Automation</button>
-          <button class="filter" type="button" data-filter="ecom" aria-pressed="false">E-commerce</button>
-          <button class="filter" type="button" data-filter="systems" aria-pressed="false">Systems</button>
-          <button class="filter" type="button" data-filter="uiux" aria-pressed="false">UI/UX</button>
+      <div class="hero-text">
+        <p class="hero-notice">Our work</p>
+        <h1 id="hero-h">Websites, stores and AI systems we have built</h1>
+        <div class="work-head grid">
+          <p class="t-lead span-6">Real estate, retail, hospitality, healthcare and garages. Every project on this page is live: open any of them and click around.</p>
+          <dl class="work-facts span-5 start-8">
+            <div><dt>Live projects</dt><dd>7</dd></div>
+            <div><dt>Industries</dt><dd>5</dd></div>
+            <div><dt>Based in</dt><dd>Dubai</dd></div>
+          </dl>
+        </div>
+        <div class="work-strip" aria-hidden="true">
+          <img src="/images/shots/garage.webp" alt="" width="1440" height="900">
+          <img src="/images/shots/realestate.webp" alt="" width="1440" height="900">
+          <img src="/images/shots/ai-support.webp" alt="" width="1440" height="900">
+          <img src="/images/shots/ecommerce.webp" alt="" width="1440" height="900">
         </div>
       </div>
-      <div class="grid proj-grid">
-{cards}      </div>
+    </div>
+  </section>
+  <section class="section" id="featured" style="--h: 2" data-moment="pinned-chapters" aria-labelledby="featured-h">
+    <div class="wrap mo-pc__grid">
+      <div class="mo-pc__text">
+        <h2 id="featured-h">Four builds, one at a time</h2>
+        <ol class="mo-pc__steps">
+{''.join(chapter(*p) for p in PROJECTS[:4])}        </ol>
+      </div>
+      <div class="mo-pc__visuals frame"></div>
+    </div>
+  </section>
+  <section class="section ground-surface" id="projects" aria-labelledby="projects-h">
+    <div class="wrap">
+      <div class="section-head"><h2 id="projects-h">All seven projects. <span class="muted">Point at a project to see it, click its name to open the live site.</span></h2></div>
+      <div class="grid grid--top fill" data-peek>
+        <ul class="idx span-6">
+{rows}        </ul>
+        <div class="idx-frame span-6 start-7">
+{frames}        </div>
+      </div>
     </div>
   </section>
 '''
 work_body += split('social', 'Social media handling', 'Social media that turns followers into leads',
     'Beyond websites, we run and grow your business accounts end to end, so your pages bring in real enquiries, tracked from the first DM.',
     ['Content and page management', 'Daily posts, reels and stories', 'Audience growth strategy', 'Hashtag and local SEO', 'DM and comment handling', 'AI-assisted replies', 'Meta and Instagram ads', 'Leads sent to CRM or WhatsApp'],
-    INBOX, 'ground-surface')
+    INBOX)
 
 page('/work/', 'work/index.html', 'Our work: websites, stores and AI automation projects | Avento AI',
      'Websites, digital platforms and automation we have built for real estate, e-commerce, hospitality, healthcare and garages.',
      '/work/', work_body, ('Want results like these?', 'Tell us what you are building and we show you how we would approach it.'),
-     fragments=('checklist',), diagram=False,
-     css='''  #projects .panel { --p-h: 180px; }
-  .proj .t-label { margin: 0 0 var(--s-2); }
-  .proj__stack { margin-top: var(--s-4); font: 400 13px/1.3 var(--font-mono); color: var(--muted); }
-  .proj.is-hidden { display: none; }
-  .filters { display: flex; flex-direction: row; flex-wrap: wrap; gap: 8px; margin-top: var(--s-5); }
-  .next-tools { position: absolute; inset: 0; display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 12px; padding: 24px; }
-  .next-tools .ic-tile { --tile: 52px; }
-  .filter { min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: 500 14px/1 var(--font-text); cursor: pointer; }
-  .filter[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-  #projects .proj-grid { row-gap: var(--s-6); }
-  #projects .card--row p:not(.t-label):not(.proj__stack) { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  @media (max-width: 1279px) { #projects { --h: auto !important; height: auto; min-height: 200svh; } }
+     fragments=('checklist',), moments=('pinned-chapters',), diagram=False,
+     css='''  /* hero: the headline across the page, the facts on the right, a strip of four live projects at the foot */
+  .hero--work .hero-text { display: flex; flex-direction: column; height: 100%; }
+  .hero--work h1 { max-width: 16ch; }
+  .work-head { margin-top: var(--s-5); align-items: end; }
+  .work-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-5); margin: 0; }
+  .work-facts dt { font: 400 13px/1.3 var(--font-mono); color: var(--muted); }
+  .work-facts dd { margin: var(--s-2) 0 0; font: var(--display-weight) 40px/1 var(--font-display); letter-spacing: var(--display-tracking); }
+  .work-strip { margin-top: auto; padding-top: var(--s-6); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-4); }
+  .work-strip img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 20px 40px -24px rgb(10 10 11 / .35); }
+  /* the pinned chapters: each frame is a browser window with the project's stack in its bar */
+  .mo-pc__visual .shotwin--fill { height: 100%; display: flex; flex-direction: column; }
+  .mo-pc__visual .shotwin--fill .shotwin__img { flex: 1; min-height: 0; height: 100%; aspect-ratio: auto; }
+  .shot-stack { margin-left: auto; white-space: nowrap; flex: none; }
+  .mo-pc__visual, .mo-pc__visual .shotwin { min-width: 0; width: 100%; }
+  .shotwin .shot-bar { min-width: 0; overflow: hidden; }
+  .shotwin .shot-bar > span:not(.d-win__dots):not(.shot-stack) { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .mo-pc__step .t-label { display: inline-block; margin-bottom: 4px; }
+  /* the index: numbered rows beside one large preview that changes with the row under the pointer */
+  .idx { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .idx li { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; grid-template-rows: auto auto; column-gap: var(--s-4); row-gap: 4px;
+            padding: 18px 12px; border-bottom: 1px solid var(--line); border-radius: 12px; cursor: pointer;
+            transition: background-color .3s cubic-bezier(.22,1,.36,1), padding .3s cubic-bezier(.22,1,.36,1); }
+  .idx li:hover, .idx li.is-on, .idx li:focus-visible { background: var(--bg); padding-left: 24px; }
+  .idx__n { grid-row: 1 / span 2; font: 400 13px/26px var(--font-mono); color: var(--muted); }
+  .idx__name { font: 500 20px/26px var(--font-text); letter-spacing: -0.01em; }
+  .idx__name a { color: inherit; text-decoration: none; }
+  .idx li.is-on .idx__name a, .idx li:hover .idx__name a { color: var(--accent); }
+  .idx__kind { grid-column: 2; font-size: 15px; line-height: 22px; color: var(--muted); }
+  .idx__tech { grid-column: 3; grid-row: 1; align-self: center; font: 400 13px/1.3 var(--font-mono); color: var(--muted); }
+  .idx-frame { position: relative; aspect-ratio: 16 / 10; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line); background: #fff;
+               box-shadow: 0 30px 60px -32px rgb(10 10 11 / .4); }
+  .idx-frame .frame__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; animation: idx-in .5s cubic-bezier(.22,1,.36,1); }
+  @keyframes idx-in { from { opacity: 0; transform: scale(1.03); } }
+  @media (prefers-reduced-motion: reduce) { .idx-frame .frame__img { animation: none; } .idx li { transition: none; } }
+  @media (max-width: 1279px) { .idx li { padding-top: 12px; padding-bottom: 12px; } .idx__name { font-size: 18px; } }
+  @media (min-width: 640px) and (max-width: 1023px) { #projects { --h: 2 } }
+  @media (max-width: 1023px) { .work-strip img:nth-child(n+3) { display: none; } .work-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } .work-facts dd { font-size: 32px; } }
   @media (max-width: 639px) {
-    #projects { --hm: 2; }
-    #projects .proj-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 12px; }
-    #projects .proj { grid-column: auto !important; }
-    #projects .panel { --p-h: 104px; }
-    #projects .proj p:not(.t-label), #projects .proj .t-label { display: none; }
-    #projects .proj h3 { font-size: 15px; line-height: 20px; }
-    .filters .filter { min-height: 44px; padding: 0 12px; font-size: 13px; }
+    .work-facts { gap: var(--s-3); margin-top: var(--s-5); }
+    .work-facts dd { font-size: 26px; }
+    .work-strip img:nth-child(n+2) { display: none; } .work-strip { grid-template-columns: 1fr; }
+    .shot-stack { display: none; }
+    #featured .mo-pc__step:nth-child(n+3) { display: none; }
+    #featured .mo-pc__step > p { display: none; }
+    .idx-frame { display: none; }
+    .idx li { padding: 14px 4px; } .idx li:hover, .idx li.is-on { padding-left: 4px; } .idx__tech { display: none; } .idx__name { font-size: 17px; }
   }
 ''')
-
-# filter script: tiny, page-only (the kit has no filter part)
-work = (ROOT / 'work/index.html').read_text(encoding='utf-8')
-work = work.replace('</body>', '''<script>
-document.querySelectorAll('.filter').forEach(b => b.addEventListener('click', () => {
-  document.querySelectorAll('.filter').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-  const f = b.dataset.filter;
-  document.querySelectorAll('.proj').forEach(p => p.classList.toggle('is-hidden', f !== 'all' && !p.dataset.cat.split(' ').includes(f)));
-}));
-</script>
-</body>''')
-(ROOT / 'work/index.html').write_text(work, encoding='utf-8')
 
 
 # ---------------------------------------------------------------- ABOUT
@@ -486,8 +515,8 @@ page('/about/', 'about/index.html', 'About Avento AI: a technology agency in Dub
 ''')
 # the old site's links all point to /about#contact: keep that address landing on the form
 about = (ROOT / 'about/index.html').read_text(encoding='utf-8')
-about = about.replace('id="contact-form"', 'id="contact"', 1).replace('<footer class="footer closing footer--statement" id="contact"', '<footer class="footer closing footer--statement" id="closing"')
-about = about.replace('href="/about/#contact" class="btn', 'href="#contact" class="btn')
+about = about.replace('id="contact-form"', 'id="contact"', 1).replace('<footer class="footer closing footer--dark ground-inverse" id="contact"', '<footer class="footer closing footer--dark ground-inverse" id="closing"')
+about = about.replace('class="btn btn--primary" href="/about/#contact"', 'class="btn btn--primary" href="#contact"')
 (ROOT / 'about/index.html').write_text(about, encoding='utf-8')
 
 
