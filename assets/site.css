@@ -19,3 +19,47 @@
 
 /* 3. A very small phone (under 380px) shows the mark alone in the bar, so the main action and the menu still fit */
 @media (max-width: 379px) { .nav__bar .nav__name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } }
+
+/* 4. The footer: "How can we help?" beside the ways to reach us, then the directory and the legal row (light, like the page) */
+.footer.closing.av-foot { height: auto !important; min-height: 0; padding: clamp(80px, 10vw, 140px) 0 32px; background: var(--surface); color: var(--ink); border-top: 1px solid var(--line); }
+.av-foot .wrap { display: block; }
+.av-foot__top { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(40px, 7vw, 120px); align-items: start; }
+.av-foot__eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 24px; font: 500 14px/1 var(--font-text); color: var(--muted); }
+.av-foot__dot { width: 8px; height: 8px; border-radius: 50%; background: #12a150; box-shadow: 0 0 0 0 rgb(18 161 80 / .5); animation: av-pulse 2.4s infinite; }
+@keyframes av-pulse { 0% { box-shadow: 0 0 0 0 rgb(18 161 80 / .45); } 70% { box-shadow: 0 0 0 10px rgb(18 161 80 / 0); } 100% { box-shadow: 0 0 0 0 rgb(18 161 80 / 0); } }
+.av-foot__title { margin: 0; font: var(--display-weight) clamp(48px, 7vw, 104px)/.95 var(--font-display); letter-spacing: -0.045em; font-stretch: var(--display-stretch, 100%); }
+.av-foot__lead { margin: 28px 0 0; max-width: 34ch; font-size: 19px; line-height: 28px; color: var(--muted); }
+.av-foot__actions { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-strong, rgb(10 10 11 / .14)); }
+.av-foot__actions li { border-bottom: 1px solid rgb(10 10 11 / .14); }
+.footer.closing.av-foot .av-foot__actions a { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto; column-gap: 16px; align-items: center; padding: 22px 4px; color: inherit; text-decoration: none;
+                      transition: padding .4s cubic-bezier(.22,1,.36,1); }
+.av-foot__a { grid-row: 1; grid-column: 1; font: 500 clamp(20px, 2vw, 26px)/1.2 var(--font-text); letter-spacing: -0.02em; }
+.av-foot__s { grid-row: 2; grid-column: 1; font-size: 14px; color: var(--muted); margin-top: 4px; }
+.av-foot__go { grid-row: 1 / span 2; grid-column: 2; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgb(10 10 11 / .16); background: var(--bg);
+               transition: background-color .3s, color .3s, border-color .3s; }
+.av-foot__go .ur { width: 14px; height: 14px; }
+.av-foot__actions a:hover, .av-foot__actions a:focus-visible { padding-left: 14px; }
+.av-foot__actions a:hover .av-foot__a { color: var(--accent); }
+.av-foot__actions a:hover .av-foot__go, .av-foot__actions a:focus-visible .av-foot__go { background: var(--accent); border-color: var(--accent); color: #fff; }
+.av-foot__actions li:first-child .av-foot__go { background: var(--accent); border-color: var(--accent); color: #fff; }
+.av-foot__mid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(40px, 7vw, 120px); margin-top: clamp(72px, 9vw, 128px); padding-top: 40px; border-top: 1px solid rgb(10 10 11 / .1); }
+.av-foot__brand p { margin: 16px 0 0; max-width: 36ch; color: var(--muted); font-size: 15px; line-height: 23px; }
+.av-foot__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.av-foot__cols h3 { margin: 0 0 14px; font: 400 12px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.av-foot__cols ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.footer.closing.av-foot .av-foot__cols a { display: inline-block; padding: 6px 0; color: var(--ink); text-decoration: none; font-size: 15px; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .35s cubic-bezier(.22,1,.36,1); }
+.av-foot__cols a:hover { background-size: 100% 1px; }
+.av-foot__legal { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 56px; padding-top: 24px; border-top: 1px solid rgb(10 10 11 / .1); font-size: 13px; color: var(--muted); }
+.av-foot__clock time { font-family: var(--font-mono); color: var(--ink); }
+.av-foot__links { display: inline-flex; gap: 20px; }
+.footer.closing.av-foot .av-foot__links a { color: var(--muted); text-decoration: none; display: inline-block; padding: 12px 0; }
+.av-foot__links a:hover { color: var(--ink); }
+@media (max-width: 1023px) {
+  .av-foot__top, .av-foot__mid { grid-template-columns: 1fr; gap: 48px; }
+}
+@media (max-width: 639px) {
+  .av-foot__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .av-foot__cols > div:last-child { grid-column: 1 / -1; }
+  .av-foot__legal { flex-direction: column; align-items: flex-start; gap: 4px; }
+}
+@media (prefers-reduced-motion: reduce) { .av-foot__dot { animation: none; } .av-foot__actions a, .av-foot__cols a { transition: none; } }

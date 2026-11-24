@@ -52,7 +52,7 @@ def head(title, desc, path, fragments=(), moments=(), diagram=False, css=''):
 <link rel="stylesheet" href="/assets/icons/icon.css">
 {ROOT_VARS}
 <link rel="stylesheet" href="/assets/ui/base.css">
-{frag}{'<link rel="stylesheet" href="/assets/diagrams/diagram.css">' + chr(10) if diagram else ''}<link rel="stylesheet" href="/assets/site.css">
+{frag}{'<link rel="stylesheet" href="/assets/diagrams/diagram.css">' + chr(10) if diagram else ''}<link rel="stylesheet" href="/assets/site.css?v=3">
 <script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
 <script src="/assets/backgrounds/backgrounds.js"></script>
 {mo}<style>
@@ -72,8 +72,6 @@ def nav(current):
 
 def footer(h2, line):
     f = FOOTER.replace('<a href="#faq">Questions</a>', '<a href="/#faq">Questions</a>')
-    f = re.sub(r'<h2 id="close-h">.*?</h2>', f'<h2 id="close-h">{h2}</h2>', f, 1, flags=re.S)
-    f = re.sub(r'(<h2 id="close-h">.*?</h2>\s*<p[^>]*>).*?(</p>)', lambda m: m.group(1) + line + m.group(2), f, count=1, flags=re.S)
     return f
 
 
@@ -237,39 +235,37 @@ page('/services/', 'services/index.html', 'Services: AI automation, websites and
 
 
 # ---------------------------------------------------------------- WORK
+# (cat, image, name, kind, one line, tags, url)
 PROJECTS = [
-    ('garage', 'Avento GarageOS', 'Business system · Car garages', 'Customers, vehicles, job cards, invoices, appointments and stock in one system, with AI reminders that bring customers back.', 'Next.js · React · PostgreSQL · AI', 'https://smart-garage-flow.vercel.app/'),
-    ('realestate', 'Prime Property', 'Website · Real estate', 'A real estate platform that shows premium listings and turns visits into qualified leads, synced to the CRM.', 'React · Next.js · CRM API', 'https://luxury-real-estate-showcase-lemon.vercel.app/'),
-    ('ai-support', 'AI Customer Support', 'AI automation · Customer experience', 'An AI assistant that answers customers on WhatsApp and the website, collects leads and hands over to the team.', 'OpenAI · Python · WhatsApp API', 'https://realsupport-ai.vercel.app/'),
-    ('ecommerce', 'Modern E-commerce Store', 'E-commerce · Retail and fashion', 'A Shopify store with a fast, responsive shopping experience and card payments built in.', 'Shopify · Stripe · Liquid', 'https://fashion-ecommerce-store-eight.vercel.app/'),
-    ('dashboard', 'Business Dashboard', 'Business system · Operations', 'A custom dashboard for customers, analytics and daily operations, in one screen.', 'React · Node.js · PostgreSQL', 'https://real-showcase.vercel.app/'),
-    ('restaurant', 'Restaurant Website', 'UI/UX · Hospitality', 'Menu, reservations and location in one website that books tables.', 'React · Maps API · Reservations', 'https://restaurant-website-zeta-rosy.vercel.app/'),
-    ('dentist', 'Dental Clinic Website', 'Website · Healthcare and dental', 'Online appointment booking, treatment pages and patient enquiry automation.', 'Next.js · Booking API · GA4', 'https://smile-book-pro.vercel.app/'),
+    ('systems ai', 'garage', 'Avento GarageOS', 'Business system · Car garages', 'Customers, vehicles, job cards, invoices and stock in one system, with AI reminders that bring customers back.', ['Business system', 'CRM', 'AI automation'], 'https://smart-garage-flow.vercel.app/'),
+    ('web', 'realestate', 'Prime Property', 'Website · Real estate', 'A real estate platform that shows premium listings and turns visits into qualified leads.', ['Website', 'UI/UX', 'Lead generation'], 'https://luxury-real-estate-showcase-lemon.vercel.app/'),
+    ('ai', 'ai-support', 'AI Customer Support', 'AI automation · Customer experience', 'An assistant that answers customers on WhatsApp and the website and collects leads.', ['AI chatbot', 'WhatsApp', 'CRM'], 'https://realsupport-ai.vercel.app/'),
+    ('ecom uiux', 'ecommerce', 'Modern E-commerce Store', 'E-commerce · Retail and fashion', 'A Shopify store with a fast, responsive shopping experience and card payments.', ['Shopify', 'Payments', 'UI/UX'], 'https://fashion-ecommerce-store-eight.vercel.app/'),
+    ('systems', 'dashboard', 'Business Dashboard', 'Business system · Operations', 'One dashboard for customers, analytics and daily operations.', ['Dashboard', 'API integrations'], 'https://real-showcase.vercel.app/'),
+    ('web uiux', 'restaurant', 'Restaurant Website', 'UI/UX · Hospitality', 'Menu, reservations and location in one website that books tables.', ['Website', 'UI/UX', 'Bookings'], 'https://restaurant-website-zeta-rosy.vercel.app/'),
+    ('web ai', 'dentist', 'Dental Clinic Website', 'Website · Healthcare', 'Online appointment booking, treatment pages and automatic follow-up for patient enquiries.', ['Website', 'Booking', 'Automation'], 'https://smile-book-pro.vercel.app/'),
 ]
 
+ARROW_UR = '<svg class="ur" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5 8.5 3.5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 
-def chapter(img, name, kind, line, stack, url):
-    host = url.split('//')[1].rstrip('/')
-    return (f'          <li class="mo-pc__step">\n'
-            f'            <h3>{name}</h3>\n'
-            f'            <p><span class="t-label muted">{kind}</span><br>{line} <a class="link" href="{url}" target="_blank" rel="noopener">Open the live site</a></p>\n'
-            f'            <figure class="mo-pc__visual"><div class="shotwin shotwin--fill"><div class="shot-bar"><span class="d-win__dots"><i></i><i></i><i></i></span><span>{host}</span><span class="shot-stack">{stack}</span></div>'
-            f'<img class="shotwin__img" src="/images/shots/{img}.webp" alt="{name}, built by Avento AI" width="1440" height="900" data-source="client" data-subject="project"></div></figure>\n'
-            f'          </li>\n')
-
-
+tiles = ''
 rows = ''
-frames = ''
-for n, (img, name, kind, line, stack, url) in enumerate(PROJECTS, 1):
-    hidden = '' if n == 1 else ' hidden'
-    rows += (f'            <li data-peek-to="p{n}" tabindex="0">\n'
-             f'              <span class="idx__n">{n:02d}</span>\n'
-             f'              <span class="idx__name"><a href="{url}" target="_blank" rel="noopener">{name}</a></span>\n'
-             f'              <span class="idx__kind">{kind}</span>\n'
-             f'              <span class="idx__tech">{stack.split(" · ")[0]}</span>\n'
-             f'            </li>\n')
-    frames += (f'            <img class="frame__img" data-peek-for="p{n}" src="/images/shots/{img}.webp" alt="{name}, built by Avento AI" '
-               f'loading="lazy" decoding="async" width="1440" height="900" data-source="client" data-subject="project"{hidden}>\n')
+GRID_ORDER = PROJECTS[1:] + PROJECTS[:1]   # the newest (GarageOS) leads the hero, so in the grid it closes the set, across
+for n, (cat, img, name, kind, line, tags, url) in enumerate(GRID_ORDER, 1):
+    wide = ' wk-tile--wide' if n == len(GRID_ORDER) else ''
+    tag_html = ''.join(f'<li>{t}</li>' for t in tags)
+    tiles += (f'          <a class="wk-tile{wide}" data-cat="{cat}" href="{url}" target="_blank" rel="noopener">\n'
+              f'            <span class="wk-tile__media"><img src="/images/shots/{img}.webp" alt="{name}, built by Avento AI" loading="{"eager" if n < 3 else "lazy"}" decoding="async" width="1440" height="900" data-source="client" data-subject="project"><span class="wk-tile__open">Open the live site {ARROW_UR}</span></span>\n'
+              f'            <span class="wk-tile__meta"><span class="wk-tile__name">{name}</span><span class="wk-tile__kind">{kind}</span></span>\n'
+              f'            <span class="wk-tile__line">{line}</span>\n'
+              f'          </a>\n')
+    rows += (f'          <a class="wk-row" data-cat="{cat}" data-preview="/images/shots/{img}.webp" href="{url}" target="_blank" rel="noopener">\n'
+             f'            <span class="wk-row__n">{n:02d}</span>\n'
+             f'            <span class="wk-row__name">{name}</span>\n'
+             f'            <span class="wk-row__line">{line}</span>\n'
+             f'            <ul class="wk-row__tags">{tag_html}</ul>\n'
+             f'            <span class="wk-row__go">{ARROW_UR}</span>\n'
+             f'          </a>\n')
 
 INBOX = ('<div class="panel"><div class="stage stage--fade-b"><div class="at-rise fit" style="--fit-max:420px;--ax:max(24px, 50% - 210px);--ay:48px;--ay-sm:20px" data-ui-loop>\n'
          '  <div class="ui ui-panel ui-checks" data-ui="checklist">\n'
@@ -282,107 +278,198 @@ INBOX = ('<div class="panel"><div class="stage stage--fade-b"><div class="at-ris
              ('', 'Appointment booked, tomorrow 11:00'), ('', 'Sales team notified')]) +
          '    </ul>\n  </div>\n</div></div></div>')
 
-work_body = f'''  <section class="hero hero--work" data-enter aria-labelledby="hero-h">
+FILTERS = [('all', 'All work'), ('web', 'Websites'), ('ai', 'AI automation'), ('ecom', 'E-commerce'), ('systems', 'Business systems'), ('uiux', 'UI/UX')]
+filter_html = ''.join(f'<button class="wk-chip" type="button" data-filter="{k}" aria-pressed="{"true" if k == "all" else "false"}">{t}<span class="wk-chip__n" data-count="{k}"></span></button>' for k, t in FILTERS)
+
+work_body = f'''  <section class="hero hero--wk" data-enter aria-labelledby="hero-h">
     <div class="wrap">
       <div class="hero-text">
-        <p class="hero-notice">Our work</p>
-        <h1 id="hero-h">Websites, stores and AI systems we have built</h1>
-        <div class="work-head grid">
-          <p class="t-lead span-6">Real estate, retail, hospitality, healthcare and garages. Every project on this page is live: open any of them and click around.</p>
-          <dl class="work-facts span-5 start-8">
-            <div><dt>Live projects</dt><dd>7</dd></div>
-            <div><dt>Industries</dt><dd>5</dd></div>
-            <div><dt>Based in</dt><dd>Dubai</dd></div>
-          </dl>
+        <div class="wk-hero grid">
+          <div class="span-8">
+            <p class="hero-notice">Selected work · 2025 to 2026</p>
+            <h1 id="hero-h">Websites, stores and AI systems <span class="muted">that are live today</span></h1>
+          </div>
+          <p class="t-lead span-4 wk-hero__lead">Seven projects for real estate, retail, hospitality, healthcare and garages. Open any of them and click around.</p>
         </div>
-        <div class="work-strip" aria-hidden="true">
-          <img src="/images/shots/garage.webp" alt="" width="1440" height="900">
-          <img src="/images/shots/realestate.webp" alt="" width="1440" height="900">
-          <img src="/images/shots/ai-support.webp" alt="" width="1440" height="900">
-          <img src="/images/shots/ecommerce.webp" alt="" width="1440" height="900">
-        </div>
+        <a class="wk-feature" href="https://smart-garage-flow.vercel.app/" target="_blank" rel="noopener" aria-label="Open Avento GarageOS, our newest system">
+          <img src="/images/shots/garage.webp" alt="Avento GarageOS, a garage management system built by Avento AI" width="1440" height="900" fetchpriority="high" data-source="client" data-subject="project">
+          <span class="wk-feature__tag">Newest · Avento GarageOS {ARROW_UR}</span>
+        </a>
       </div>
     </div>
   </section>
-  <section class="section" id="featured" style="--h: 2" data-moment="pinned-chapters" aria-labelledby="featured-h">
-    <div class="wrap mo-pc__grid">
-      <div class="mo-pc__text">
-        <h2 id="featured-h">Four builds, one at a time</h2>
-        <ol class="mo-pc__steps">
-{''.join(chapter(*p) for p in PROJECTS[:4])}        </ol>
-      </div>
-      <div class="mo-pc__visuals frame"></div>
-    </div>
-  </section>
-  <section class="section ground-surface" id="projects" aria-labelledby="projects-h">
+  <section class="section wk" id="projects" aria-labelledby="projects-h">
     <div class="wrap">
-      <div class="section-head"><h2 id="projects-h">All seven projects. <span class="muted">Point at a project to see it, click its name to open the live site.</span></h2></div>
-      <div class="grid grid--top fill" data-peek>
-        <ul class="idx span-6">
-{rows}        </ul>
-        <div class="idx-frame span-6 start-7">
-{frames}        </div>
+      <div class="wk-bar">
+        <h2 id="projects-h" class="wk-bar__title">All projects <span class="muted" data-total>7</span></h2>
+        <div class="wk-chips" role="group" aria-label="Filter projects">{filter_html}</div>
+        <div class="wk-view" role="group" aria-label="Display">
+          <button type="button" class="wk-view__btn" data-view="grid" aria-pressed="true"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Grid</button>
+          <button type="button" class="wk-view__btn" data-view="list" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12"/></svg>List</button>
+        </div>
       </div>
+      <div class="wk-grid" data-panel="grid">
+{tiles}      </div>
+      <div class="wk-list" data-panel="list" hidden>
+        <div class="wk-list__head" aria-hidden="true"><span>No.</span><span>Project</span><span>What we built</span><span>Services</span><span></span></div>
+{rows}      </div>
+      <img class="wk-float" alt="" aria-hidden="true" width="1440" height="900">
     </div>
   </section>
 '''
 work_body += split('social', 'Social media handling', 'Social media that turns followers into leads',
     'Beyond websites, we run and grow your business accounts end to end, so your pages bring in real enquiries, tracked from the first DM.',
     ['Content and page management', 'Daily posts, reels and stories', 'Audience growth strategy', 'Hashtag and local SEO', 'DM and comment handling', 'AI-assisted replies', 'Meta and Instagram ads', 'Leads sent to CRM or WhatsApp'],
-    INBOX)
+    INBOX, 'ground-surface')
+
+WORK_CSS = '''  /* hero: the headline and the newest project, big */
+  .hero--wk .hero-text { display: flex; flex-direction: column; height: 100%; }
+  .wk-hero { align-items: end; }
+  .wk-hero h1 { font-size: clamp(40px, 5.6vw, 80px); line-height: 1.02; letter-spacing: -0.04em; max-width: 14ch; }
+  .wk-hero h1 .muted { color: #a2a2a8; }
+  .wk-hero__lead { margin: 0; }
+  .wk-feature { position: relative; display: block; flex: 1; min-height: 0; margin-top: var(--s-6); border-radius: var(--r-lg); overflow: hidden; background: #0b1730; }
+  .wk-feature img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 1s cubic-bezier(.22,1,.36,1); }
+  .wk-feature:hover img { transform: scale(1.02); }
+  .wk-feature__tag { position: absolute; left: 20px; bottom: 20px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; background: #fff; color: var(--ink); font: 500 14px/1 var(--font-text); box-shadow: 0 10px 30px -12px rgb(0 0 0 / .4); }
+  .ur { width: 12px; height: 12px; flex: none; transition: transform .35s cubic-bezier(.22,1,.36,1); }
+  a:hover > .ur, a:hover .ur { transform: translate(2px, -2px); }
+
+  /* the bar: title, filter chips, grid or list */
+  .wk { height: auto !important; min-height: 100svh; }
+  .wk-bar { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--s-5); padding-bottom: var(--s-5); border-bottom: 1px solid var(--line); }
+  .wk-bar__title { margin: 0; font-size: 28px; letter-spacing: -0.02em; }
+  .wk-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .wk-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: 500 14px/1 var(--font-text); cursor: pointer; transition: background-color .25s, color .25s, border-color .25s; }
+  .wk-chip:hover { border-color: var(--ink); }
+  .wk-chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .wk-chip__n { font: 400 12px/1 var(--font-mono); opacity: .6; }
+  .wk-view { display: inline-flex; padding: 4px; border-radius: 999px; background: var(--surface); }
+  .wk-view__btn { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 14px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font: 500 14px/1 var(--font-text); cursor: pointer; }
+  .wk-view__btn svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+  .wk-view__btn[aria-pressed="true"] { background: var(--bg); color: var(--ink); box-shadow: 0 1px 3px rgb(0 0 0 / .1); }
+
+  /* grid view: the first project across, then two up, big pictures */
+  .wk-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 24px; padding-top: var(--s-7); }
+  .wk-tile { display: flex; flex-direction: column; color: inherit; text-decoration: none; }
+  .wk-tile--wide { grid-column: 1 / -1; }
+  .wk-tile[hidden] { display: none; }
+  .wk-tile__media { position: relative; display: block; aspect-ratio: 16 / 10; border-radius: var(--r-lg); overflow: hidden; background: var(--surface); border: 1px solid var(--line); }
+  .wk-tile--wide .wk-tile__media { aspect-ratio: 21 / 9; }
+  .wk-tile__media img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 1s cubic-bezier(.22,1,.36,1); }
+  .wk-tile:hover .wk-tile__media img { transform: scale(1.03); }
+  .wk-tile__open { position: absolute; right: 16px; bottom: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px; background: #fff; color: var(--ink); font: 500 13px/1 var(--font-text);
+                   opacity: 0; transform: translateY(8px); transition: opacity .3s, transform .45s cubic-bezier(.22,1,.36,1); box-shadow: 0 10px 30px -12px rgb(0 0 0 / .45); }
+  .wk-tile:hover .wk-tile__open, .wk-tile:focus-visible .wk-tile__open { opacity: 1; transform: none; }
+  .wk-tile__meta { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-4); margin-top: var(--s-5); }
+  .wk-tile__name { font: 500 22px/1.2 var(--font-text); letter-spacing: -0.02em; }
+  .wk-tile__kind { font: 400 13px/1.3 var(--font-mono); color: var(--muted); text-align: right; }
+  .wk-tile__line { margin-top: 6px; font-size: 16px; line-height: 24px; color: var(--muted); max-width: 52ch; }
+
+  /* list view: one row a project, the preview floats beside the pointer */
+  .wk-list { padding-top: var(--s-5); }
+  .wk-list__head, .wk-row { display: grid; grid-template-columns: 56px minmax(0, 3fr) minmax(0, 5fr) minmax(0, 3fr) 32px; gap: var(--s-5); align-items: center; }
+  .wk-list__head { padding: 0 8px var(--s-3); font: 400 12px/1 var(--font-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .wk-row { padding: 26px 8px; border-top: 1px solid var(--line); color: inherit; text-decoration: none; transition: padding .35s cubic-bezier(.22,1,.36,1), background-color .35s; }
+  .wk-row[hidden] { display: none; }
+  .wk-row:hover, .wk-row:focus-visible { padding-left: 20px; background: var(--surface); }
+  .wk-row__n { font: 400 13px/1 var(--font-mono); color: var(--muted); }
+  .wk-row__name { font: 500 24px/1.15 var(--font-text); letter-spacing: -0.02em; }
+  .wk-row:hover .wk-row__name { color: var(--accent); }
+  .wk-row__line { color: var(--muted); font-size: 15px; line-height: 22px; }
+  .wk-row__tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .wk-row__tags li { padding: 5px 10px; border-radius: 999px; background: var(--surface); font-size: 13px; }
+  .wk-row:hover .wk-row__tags li { background: var(--bg); }
+  .wk-row__go { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line); }
+  .wk-row:hover .wk-row__go { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .wk-float { position: fixed; left: 0; top: 0; z-index: 30; width: 360px; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 14px; pointer-events: none;
+              box-shadow: 0 30px 60px -20px rgb(10 10 11 / .45); opacity: 0; transform: translate3d(-9999px, 0, 0) scale(.92); transition: opacity .25s; }
+  .wk-float.is-on { opacity: 1; }
+
+  @media (max-width: 1023px) {
+    .wk-bar { grid-template-columns: 1fr auto; }
+    .wk-chips { grid-column: 1 / -1; grid-row: 2; }
+    .wk-list__head, .wk-row { grid-template-columns: 40px minmax(0, 1fr) 32px; }
+    .wk-row__line, .wk-row__tags, .wk-list__head span:nth-child(3), .wk-list__head span:nth-child(4) { display: none; }
+  }
+  @media (max-width: 639px) {
+    .wk-hero h1 { font-size: 38px; }
+    .wk-hero__lead { margin-top: var(--s-4); }
+    .wk-feature { flex: 1; min-height: 240px; }
+    .wk-feature__tag { left: 12px; bottom: 12px; font-size: 13px; }
+    .wk-chips { overflow-x: auto; flex-wrap: nowrap; margin-inline: -24px; padding-inline: 24px; scrollbar-width: none; }
+    .wk-chip { flex: none; min-height: 44px; }
+    .wk-view__btn { min-height: 40px; }
+    .wk-grid { grid-template-columns: 1fr; gap: 40px; }
+    .wk-tile--wide .wk-tile__media { aspect-ratio: 16 / 10; }
+    .wk-tile__meta { flex-direction: column; gap: 4px; }
+    .wk-tile__kind { text-align: left; }
+    .wk-tile__open { opacity: 1; transform: none; }
+    .wk-row { padding: 20px 4px; } .wk-row__name { font-size: 19px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .wk-tile__media img, .wk-feature img, .wk-row, .wk-float { transition: none; } }
+'''
+
+WORK_JS = '''<script>
+(() => {
+  const root = document.getElementById('projects');
+  const items = [...root.querySelectorAll('[data-cat]')];
+  const chips = [...root.querySelectorAll('.wk-chip')];
+  // counts on the chips (projects per category, in the grid)
+  const tiles = [...root.querySelectorAll('.wk-tile')];
+  chips.forEach(c => {
+    const k = c.dataset.filter;
+    c.querySelector('[data-count]').textContent = k === 'all' ? tiles.length : tiles.filter(t => t.dataset.cat.split(' ').includes(k)).length;
+  });
+  const total = root.querySelector('[data-total]');
+  chips.forEach(c => c.addEventListener('click', () => {
+    chips.forEach(x => x.setAttribute('aria-pressed', String(x === c)));
+    const k = c.dataset.filter;
+    items.forEach(i => { i.hidden = !(k === 'all' || i.dataset.cat.split(' ').includes(k)); });
+    // the first visible tile spans the row only when it is the full set
+    tiles.forEach(t => t.classList.toggle('wk-tile--wide', k === 'all' && t === tiles[tiles.length - 1]));
+    total.textContent = tiles.filter(t => !t.hidden).length;
+  }));
+  // grid or list
+  const views = [...root.querySelectorAll('.wk-view__btn')];
+  views.forEach(v => v.addEventListener('click', () => {
+    views.forEach(x => x.setAttribute('aria-pressed', String(x === v)));
+    root.querySelectorAll('[data-panel]').forEach(p => { p.hidden = p.dataset.panel !== v.dataset.view; });
+  }));
+  // list view: the project's screen follows the pointer (mouse only, not under reduced motion)
+  const float = root.querySelector('.wk-float');
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!fine) return;
+  let x = 0, y = 0, cx = 0, cy = 0, raf = 0, on = false;
+  const tick = () => {
+    cx += (x - cx) * 0.18; cy += (y - cy) * 0.18;
+    float.style.transform = `translate3d(${cx + 28}px, ${cy - 110}px, 0) scale(${on ? 1 : .92})`;
+    raf = on || Math.abs(x - cx) > .5 ? requestAnimationFrame(tick) : 0;
+  };
+  const hide = () => { on = false; float.classList.remove('is-on'); };
+  addEventListener('scroll', hide, { passive: true });
+  root.querySelector('.wk-list').addEventListener('pointerleave', hide);
+  root.querySelectorAll('.wk-row').forEach(r => {
+    r.addEventListener('pointerenter', e => {
+      if (e.pointerType !== 'mouse') return;
+      float.src = r.dataset.preview;
+      if (!on) { cx = x = e.clientX; cy = y = e.clientY; }
+      on = true; float.classList.add('is-on');
+      if (!raf) raf = requestAnimationFrame(tick);
+    });
+    r.addEventListener('pointerleave', () => { on = false; float.classList.remove('is-on'); });
+    r.addEventListener('pointermove', e => { x = e.clientX; y = e.clientY; if (!raf) raf = requestAnimationFrame(tick); });
+  });
+})();
+</script>
+'''
 
 page('/work/', 'work/index.html', 'Our work: websites, stores and AI automation projects | Avento AI',
      'Websites, digital platforms and automation we have built for real estate, e-commerce, hospitality, healthcare and garages.',
      '/work/', work_body, ('Want results like these?', 'Tell us what you are building and we show you how we would approach it.'),
-     fragments=('checklist',), moments=('pinned-chapters',), diagram=False,
-     css='''  /* hero: the headline across the page, the facts on the right, a strip of four live projects at the foot */
-  .hero--work .hero-text { display: flex; flex-direction: column; height: 100%; }
-  .hero--work h1 { max-width: 16ch; }
-  .work-head { margin-top: var(--s-5); align-items: end; }
-  .work-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-5); margin: 0; }
-  .work-facts dt { font: 400 13px/1.3 var(--font-mono); color: var(--muted); }
-  .work-facts dd { margin: var(--s-2) 0 0; font: var(--display-weight) 40px/1 var(--font-display); letter-spacing: var(--display-tracking); }
-  .work-strip { margin-top: auto; padding-top: var(--s-6); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-4); }
-  .work-strip img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 20px 40px -24px rgb(10 10 11 / .35); }
-  /* the pinned chapters: each frame is a browser window with the project's stack in its bar */
-  .mo-pc__visual .shotwin--fill { height: 100%; display: flex; flex-direction: column; }
-  .mo-pc__visual .shotwin--fill .shotwin__img { flex: 1; min-height: 0; height: 100%; aspect-ratio: auto; }
-  .shot-stack { margin-left: auto; white-space: nowrap; flex: none; }
-  .mo-pc__visual, .mo-pc__visual .shotwin { min-width: 0; width: 100%; }
-  .shotwin .shot-bar { min-width: 0; overflow: hidden; }
-  .shotwin .shot-bar > span:not(.d-win__dots):not(.shot-stack) { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .mo-pc__step .t-label { display: inline-block; margin-bottom: 4px; }
-  /* the index: numbered rows beside one large preview that changes with the row under the pointer */
-  .idx { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-  .idx li { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; grid-template-rows: auto auto; column-gap: var(--s-4); row-gap: 4px;
-            padding: 18px 12px; border-bottom: 1px solid var(--line); border-radius: 12px; cursor: pointer;
-            transition: background-color .3s cubic-bezier(.22,1,.36,1), padding .3s cubic-bezier(.22,1,.36,1); }
-  .idx li:hover, .idx li.is-on, .idx li:focus-visible { background: var(--bg); padding-left: 24px; }
-  .idx__n { grid-row: 1 / span 2; font: 400 13px/26px var(--font-mono); color: var(--muted); }
-  .idx__name { font: 500 20px/26px var(--font-text); letter-spacing: -0.01em; }
-  .idx__name a { color: inherit; text-decoration: none; }
-  .idx li.is-on .idx__name a, .idx li:hover .idx__name a { color: var(--accent); }
-  .idx__kind { grid-column: 2; font-size: 15px; line-height: 22px; color: var(--muted); }
-  .idx__tech { grid-column: 3; grid-row: 1; align-self: center; font: 400 13px/1.3 var(--font-mono); color: var(--muted); }
-  .idx-frame { position: relative; aspect-ratio: 16 / 10; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line); background: #fff;
-               box-shadow: 0 30px 60px -32px rgb(10 10 11 / .4); }
-  .idx-frame .frame__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; animation: idx-in .5s cubic-bezier(.22,1,.36,1); }
-  @keyframes idx-in { from { opacity: 0; transform: scale(1.03); } }
-  @media (prefers-reduced-motion: reduce) { .idx-frame .frame__img { animation: none; } .idx li { transition: none; } }
-  @media (max-width: 1279px) { .idx li { padding-top: 12px; padding-bottom: 12px; } .idx__name { font-size: 18px; } }
-  @media (min-width: 640px) and (max-width: 1023px) { #projects { --h: 2 } }
-  @media (max-width: 1023px) { .work-strip img:nth-child(n+3) { display: none; } .work-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } .work-facts dd { font-size: 32px; } }
-  @media (max-width: 639px) {
-    .work-facts { gap: var(--s-3); margin-top: var(--s-5); }
-    .work-facts dd { font-size: 26px; }
-    .work-strip img:nth-child(n+2) { display: none; } .work-strip { grid-template-columns: 1fr; }
-    .shot-stack { display: none; }
-    #featured .mo-pc__step:nth-child(n+3) { display: none; }
-    #featured .mo-pc__step > p { display: none; }
-    .idx-frame { display: none; }
-    .idx li { padding: 14px 4px; } .idx li:hover, .idx li.is-on { padding-left: 4px; } .idx__tech { display: none; } .idx__name { font-size: 17px; }
-  }
-''')
+     fragments=('checklist',), diagram=False, css=WORK_CSS)
+_w = (ROOT / 'work/index.html').read_text(encoding='utf-8')
+(ROOT / 'work/index.html').write_text(_w.replace('</body>', WORK_JS + '</body>'), encoding='utf-8')
 
 
 # ---------------------------------------------------------------- ABOUT
@@ -515,8 +602,8 @@ page('/about/', 'about/index.html', 'About Avento AI: a technology agency in Dub
 ''')
 # the old site's links all point to /about#contact: keep that address landing on the form
 about = (ROOT / 'about/index.html').read_text(encoding='utf-8')
-about = about.replace('id="contact-form"', 'id="contact"', 1).replace('<footer class="footer closing footer--dark ground-inverse" id="contact"', '<footer class="footer closing footer--dark ground-inverse" id="closing"')
-about = about.replace('class="btn btn--primary" href="/about/#contact"', 'class="btn btn--primary" href="#contact"')
+about = about.replace('id="contact-form"', 'id="contact"', 1).replace('<footer class="footer closing av-foot" id="contact"', '<footer class="footer closing av-foot" id="closing"')
+about = about.replace('class="btn btn--primary" href="/about/#contact"', 'class="btn btn--primary" href="#contact"').replace('<li><a href="/about/#contact"><span class="av-foot__a">', '<li><a href="#contact"><span class="av-foot__a">')
 (ROOT / 'about/index.html').write_text(about, encoding='utf-8')
 
 
