@@ -63,3 +63,18 @@
   .av-foot__legal { flex-direction: column; align-items: flex-start; gap: 4px; }
 }
 @media (prefers-reduced-motion: reduce) { .av-foot__dot { animation: none; } .av-foot__actions a, .av-foot__cols a { transition: none; } }
+
+/* 5. A section never lets its content run out of it: on a short, wide screen (a laptop with browser bars) the
+   section grows to hold what it carries instead of spilling over the next one. Sections that fit keep their
+   one or two screens; the pinned and scroll moments set their own heights and are left alone. */
+main > section.section:not([data-moment]) { height: auto !important; min-height: calc(var(--h, 1) * 100svh); }
+@media (max-width: 639px) { main > section.section:not([data-moment]) { min-height: calc(var(--hm, var(--h, 1)) * 100lvh); } }
+/* the hero on a short screen (under 760px tall, or a small phone): it grows with its words and buttons, and the
+   centred hero's window takes a set height instead of the rest of a screen that is too short for it */
+@media (max-height: 760px), (max-width: 639px) {
+  main > section.hero { height: auto !important; min-height: 100svh; }
+  .hero--centred .hero__window { flex: none !important; height: 420px; }
+}
+@media (max-width: 639px) { .hero--centred .hero__window { height: 300px; } }
+/* the filling block of a section (.fill) still takes the space left, but never shrinks below what it holds */
+main > section:not(.hero) > .wrap > .fill, main > section:not(.hero) .group > .fill { flex: 1 0 auto !important; }

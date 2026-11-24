@@ -52,7 +52,7 @@ def head(title, desc, path, fragments=(), moments=(), diagram=False, css=''):
 <link rel="stylesheet" href="/assets/icons/icon.css">
 {ROOT_VARS}
 <link rel="stylesheet" href="/assets/ui/base.css">
-{frag}{'<link rel="stylesheet" href="/assets/diagrams/diagram.css">' + chr(10) if diagram else ''}<link rel="stylesheet" href="/assets/site.css?v=3">
+{frag}{'<link rel="stylesheet" href="/assets/diagrams/diagram.css">' + chr(10) if diagram else ''}<link rel="stylesheet" href="/assets/site.css?v=8">
 <script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
 <script src="/assets/backgrounds/backgrounds.js"></script>
 {mo}<style>
@@ -130,7 +130,7 @@ SHARED_CSS = '''  .checks2 { list-style: none; margin: var(--s-6) 0 0; padding: 
   .hero-visual .panel { height: 100%; min-height: 440px; }
   .split-visual .panel { --p-h: 520px; }
   @media (max-width: 1023px) { .hero-visual .panel { min-height: 340px; } .split-visual .panel { --p-h: 420px; } }
-  @media (max-width: 639px) { .checks2 { grid-template-columns: 1fr; } .checks2 li:nth-child(n+7) { display: none; } .hero-visual .panel { min-height: 260px; } .split-visual .panel { --p-h: 300px; } }
+  @media (max-width: 639px) { .hero-visual .shotwin__img { aspect-ratio: 2 / 1; } .checks2 { grid-template-columns: 1fr; } .checks2 li:nth-child(n+7) { display: none; } .hero-visual .panel { min-height: 260px; } .split-visual .panel { --p-h: 300px; } }
 '''
 
 
