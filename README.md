@@ -1,16 +1,20 @@
 # Avento AI — aventoai.agency
 
-Company website for Avento AI Solutions (Dubai, UAE).
+The company website of Avento AI Solutions (Dubai, UAE). Plain static HTML, no build step:
+Vercel serves this folder as it is.
 
-Static multi-page site built with Vite.
+- `index.html` — Home (written by hand)
+- `services/`, `work/`, `about/`, `privacy/`, `terms/` — built by `python tools/pages.py`,
+  which copies the Home page's header and footer into each page. Edit the page bodies in
+  `tools/pages.py`, run it, then commit.
+- `assets/` — the design system: layout, motion, cards, diagrams, scroll moments, the hero's
+  shader ground and the real tool icons. `assets/site.css` holds the page transitions.
+- `images/` — the logo and screenshots of the live projects.
+
+Preview locally:
 
 ```
-npm install
-npm run dev      # local preview at http://localhost:5173
-npm run build    # production files in dist/
+python -m http.server 5173
 ```
 
-- Pages: `index.html`, `services/`, `work/`, `about/`, `privacy/`, `terms/`
-- Shared header and footer: `partials/` (injected at build time)
-- Styles: `src/style.css` · Scripts: `src/main.js`
-- Images: `public/images/` (project screenshots in `public/images/shots/`)
+then open http://localhost:5173.

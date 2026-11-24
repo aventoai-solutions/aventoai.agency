@@ -1,240 +1,296 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-type="software" data-radius="soft" data-ground="sky" data-buttons="solid" data-motion>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our Work | Websites, Stores &amp; AI Automation Projects | Avento AI</title>
-  <meta name="description" content="Explore websites, digital platforms and automation solutions we have created for real estate, e-commerce, hospitality, healthcare and corporate clients." />
-  <meta name="author" content="Avento AI" />
-  <meta property="og:title" content="Our Work | Avento AI" />
-  <meta property="og:description" content="Explore websites, digital platforms and automation solutions we have created for real estate, e-commerce, hospitality, healthcare and corporate clients." />
-  <meta property="og:url" content="https://aventoai.agency/work/" />
-  <meta name="theme-color" content="#ffffff" />
-  <link rel="icon" type="image/png" href="/images/favicon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <script type="module" src="/src/main.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Our work: websites, stores and AI automation projects | Avento AI</title>
+<meta name="description" content="Websites, digital platforms and automation we have built for real estate, e-commerce, hospitality, healthcare and garages.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Our work: websites, stores and AI automation projects | Avento AI">
+<meta property="og:description" content="Websites, digital platforms and automation we have built for real estate, e-commerce, hospitality, healthcare and garages.">
+<meta property="og:image" content="https://aventoai.agency/share.jpg">
+<meta property="og:url" content="https://aventoai.agency/work/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/images/favicon.png" type="image/png">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="https://aventoai.agency/work/">
+<meta name="site-kind" content="software">
+<meta name="page-type" content="software">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,400..600&family=Geist+Mono:wght@400..500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/system.css">
+<link rel="stylesheet" href="/assets/ui/cards.css">
+<link rel="stylesheet" href="/assets/motion/motion.css">
+<link rel="stylesheet" href="/assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="/assets/layout/layout.css">
+<link rel="stylesheet" href="/assets/icons/icon.css">
+<style>
+:root {
+  --p-bg: #ffffff; --p-surface: #f3f4f6; --p-ink: #0a0a0b; --p-muted: #555558;
+  --p-accent: #1557ff; --p-accent-ink: #ffffff; --p-action: #1557ff; --p-action-ink: #ffffff;
+  --p-inv-bg: #0a0a0b; --p-inv-surface: #171718; --p-inv-ink: #ffffff; --p-inv-muted: #979797;
+  --p-inv-accent: #1557ff; --p-inv-accent-ink: #ffffff; --p-inv-action: #1557ff; --p-inv-action-ink: #ffffff;
+  --font-display: "Mona Sans", system-ui, sans-serif;
+  --font-text: "Mona Sans", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.03em;
+  --display-tracking-xl: -0.04em;
+  --display-stretch: 104%;
+  --ly-scale: 0.96;
+}
+</style>
+<link rel="stylesheet" href="/assets/ui/base.css">
+<link rel="stylesheet" href="/assets/ui/checklist/fragment.css">
+<link rel="stylesheet" href="/assets/site.css">
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script src="/assets/backgrounds/backgrounds.js"></script>
+<style>
+  .panel > .frame__img, .frame > .frame__img { object-position: top center; }
+  .checks2 { list-style: none; margin: var(--s-6) 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s-5); }
+  .checks2 li { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 16px; line-height: 24px; }
+  .checks2 .ui-check__box { flex: none; width: 20px; height: 20px; margin-top: 2px; border-radius: 6px; background: var(--ink); display: grid; place-items: center; }
+  .checks2 .ui-check__box svg { width: 14px; height: 14px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .shotwin { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line); background: #fff; box-shadow: 0 24px 60px -30px rgb(10 10 11 / .35); }
+  .shotwin .shot-bar { display: flex; align-items: center; gap: 12px; height: 36px; padding: 0 14px; border-bottom: 1px solid var(--line); font: 400 12px/1 var(--font-mono); color: var(--muted); }
+  .shotwin .d-win__dots { display: flex; gap: 6px; } .shotwin .d-win__dots i { width: 9px; height: 9px; border-radius: 50%; background: #dcdfe2; }
+  .shotwin__img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+  .hero-visual .panel { height: 100%; min-height: 440px; }
+  .split-visual .panel { --p-h: 520px; }
+  @media (max-width: 1023px) { .hero-visual .panel { min-height: 340px; } .split-visual .panel { --p-h: 420px; } }
+  @media (max-width: 639px) { .checks2 { grid-template-columns: 1fr; } .checks2 li:nth-child(n+7) { display: none; } .hero-visual .panel { min-height: 260px; } .split-visual .panel { --p-h: 300px; } }
+  #projects .panel { --p-h: 180px; }
+  .proj .t-label { margin: 0 0 var(--s-2); }
+  .proj__stack { margin-top: var(--s-4); font: 400 13px/1.3 var(--font-mono); color: var(--muted); }
+  .proj.is-hidden { display: none; }
+  .filters { display: flex; flex-direction: row; flex-wrap: wrap; gap: 8px; margin-top: var(--s-5); }
+  .next-tools { position: absolute; inset: 0; display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 12px; padding: 24px; }
+  .next-tools .ic-tile { --tile: 52px; }
+  .filter { min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: 500 14px/1 var(--font-text); cursor: pointer; }
+  .filter[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  #projects .proj-grid { row-gap: var(--s-6); }
+  #projects .card--row p:not(.t-label):not(.proj__stack) { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  @media (max-width: 1279px) { #projects { --h: auto !important; height: auto; min-height: 200svh; } }
+  @media (max-width: 639px) {
+    #projects { --hm: 2; }
+    #projects .proj-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 12px; }
+    #projects .proj { grid-column: auto !important; }
+    #projects .panel { --p-h: 104px; }
+    #projects .proj p:not(.t-label), #projects .proj .t-label { display: none; }
+    #projects .proj h3 { font-size: 15px; line-height: 20px; }
+    .filters .filter { min-height: 44px; padding: 0 12px; font-size: 13px; }
+  }
+</style>
 </head>
-<body data-page="work">
-  <!-- @header -->
-
-  <main id="main">
-    <section class="page-hero">
-      <div class="container">
-        <span class="eyebrow">Our work</span>
-        <h1 class="display">Websites, platforms and automation we have built</h1>
-        <p class="lead">Explore websites, digital platforms and automation solutions we have created. Every project below is live. Click any one to open it.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="filters" role="group" aria-label="Filter projects">
-          <button class="filter active" data-filter="all" aria-pressed="true">All</button>
-          <button class="filter" data-filter="web" aria-pressed="false">Web Development</button>
-          <button class="filter" data-filter="ai" aria-pressed="false">AI Automation</button>
-          <button class="filter" data-filter="ecom" aria-pressed="false">E-commerce</button>
-          <button class="filter" data-filter="systems" aria-pressed="false">Business Systems</button>
-          <button class="filter" data-filter="uiux" aria-pressed="false">UI/UX</button>
-        </div>
-
-        <div class="proj-grid">
-          <article class="proj" data-cat="web">
-            <a class="proj-media" href="https://luxury-real-estate-showcase-lemon.vercel.app/" target="_blank" rel="noopener" aria-label="View Prime Property project">
-              <div class="frame-bar"><i></i><i></i><i></i></div>
-              <div class="shot"><img src="/images/shots/realestate.webp" alt="Prime Property luxury real estate website" loading="lazy" width="1440" height="900" /></div>
-              <span class="view">View Project ↗</span>
-            </a>
-            <div class="proj-cat">Web Development · Real Estate</div>
-            <h3><a href="https://luxury-real-estate-showcase-lemon.vercel.app/" target="_blank" rel="noopener">Prime Property</a></h3>
-            <p>A modern real estate platform built to showcase premium properties and generate qualified leads.</p>
-            <div class="tags"><span class="tag line">Website Development</span><span class="tag line">UI/UX</span><span class="tag line">Lead Generation</span><span class="tag line">CRM Integration</span></div>
-            <div class="stack">React · Next.js · CRM API</div>
-            <a href="https://luxury-real-estate-showcase-lemon.vercel.app/" target="_blank" rel="noopener" class="link-arrow proj-link">View Project <span>↗</span></a>
-          </article>
-
-          <article class="proj" data-cat="ecom">
-            <a class="proj-media" href="https://fashion-ecommerce-store-eight.vercel.app/" target="_blank" rel="noopener" aria-label="View Modern E-commerce Store project">
-              <div class="frame-bar"><i></i><i></i><i></i></div>
-              <div class="shot"><img src="/images/shots/ecommerce.webp" alt="Modern fashion e-commerce store" loading="lazy" width="1440" height="900" /></div>
-              <span class="view">View Project ↗</span>
-            </a>
-            <div class="proj-cat">E-commerce · Retail &amp; Fashion</div>
-            <h3><a href="https://fashion-ecommerce-store-eight.vercel.app/" target="_blank" rel="noopener">Modern E-commerce Store</a></h3>
-            <p>A high-converting online store with a modern, responsive shopping experience.</p>
-            <div class="tags"><span class="tag line">Shopify</span><span class="tag line">E-commerce</span><span class="tag line">Payment Integration</span><span class="tag line">UI/UX</span></div>
-            <div class="stack">Shopify · Stripe · Liquid</div>
-            <a href="https://fashion-ecommerce-store-eight.vercel.app/" target="_blank" rel="noopener" class="link-arrow proj-link">View Project <span>↗</span></a>
-          </article>
-
-          <article class="proj" data-cat="ai">
-            <a class="proj-media" href="https://realsupport-ai.vercel.app/" target="_blank" rel="noopener" aria-label="View AI Customer Support project">
-              <div class="frame-bar"><i></i><i></i><i></i></div>
-              <div class="shot"><img src="/images/shots/ai-support.webp" alt="AI customer support chat system" loading="lazy" width="1440" height="900" /></div>
-              <span class="view">View Project ↗</span>
-            </a>
-            <div class="proj-cat">AI Automation · Customer Experience</div>
-            <h3><a href="https://realsupport-ai.vercel.app/" target="_blank" rel="noopener">AI Customer Support</a></h3>
-            <p>An AI support system that responds to customers and collects leads automatically.</p>
-            <div class="tags"><span class="tag line">AI Automation</span><span class="tag line">Chatbot</span><span class="tag line">CRM Integration</span><span class="tag line">WhatsApp Integration</span></div>
-            <div class="stack">OpenAI · Python · WhatsApp API</div>
-            <a href="https://realsupport-ai.vercel.app/" target="_blank" rel="noopener" class="link-arrow proj-link">View Project <span>↗</span></a>
-          </article>
-
-          <article class="proj" data-cat="systems">
-            <a class="proj-media" href="https://real-showcase.vercel.app/" target="_blank" rel="noopener" aria-label="View Business Dashboard project">
-              <div class="frame-bar"><i></i><i></i><i></i></div>
-              <div class="shot"><img src="/images/shots/dashboard.webp" alt="Admin dashboard with charts and KPI tiles" loading="lazy" width="1440" height="900" /></div>
-              <span class="view">View Project ↗</span>
-            </a>
-            <div class="proj-cat">Business Systems · Operations</div>
-            <h3><a href="https://real-showcase.vercel.app/" target="_blank" rel="noopener">Business Dashboard</a></h3>
-            <p>A custom dashboard for managing customers, analytics and daily operations.</p>
-            <div class="tags"><span class="tag line">Business Systems</span><span class="tag line">Dashboard Development</span><span class="tag line">API Integrations</span></div>
-            <div class="stack">React · Node.js · PostgreSQL</div>
-            <a href="https://real-showcase.vercel.app/" target="_blank" rel="noopener" class="link-arrow proj-link">View Project <span>↗</span></a>
-          </article>
-
-          <article class="proj" data-cat="uiux web">
-            <a class="proj-media" href="https://restaurant-website-zeta-rosy.vercel.app/" target="_blank" rel="noopener" aria-label="View Restaurant Website project">
-              <div class="frame-bar"><i></i><i></i><i></i></div>
-              <div class="shot"><img src="/images/shots/restaurant.webp" alt="Restaurant website with menu and reservations" loading="lazy" width="1440" height="900" /></div>
-              <span class="view">View Project ↗</span>
-            </a>
-            <div class="proj-cat">UI/UX · Hospitality</div>
-            <h3><a href="https://restaurant-website-zeta-rosy.vercel.app/" target="_blank" rel="noopener">Restaurant Website</a></h3>
-            <p>A restaurant website with menu display, reservations and location integration.</p>
-            <div class="tags"><span class="tag line">UI/UX Design</span><span class="tag line">Website Development</span><span class="tag line">Booking Integration</span></div>
-            <div class="stack">React · Maps API · Reservations</div>
-            <a href="https://restaurant-website-zeta-rosy.vercel.app/" target="_blank" rel="noopener" class="link-arrow proj-link">View Project <span>↗</span></a>
-          </article>
-
-          <article class="proj" data-cat="web">
-            <a class="proj-media" href="https://smile-book-pro.vercel.app/" target="_blank" rel="noopener" aria-label="View Dental Clinic Website project">
-              <div class="frame-bar"><i></i><i></i><i></i></div>
-              <div class="shot"><img src="/images/shots/dentist.webp" alt="Dental clinic website with appointment booking" loading="lazy" width="1440" height="900" /></div>
-              <span class="view">View Project ↗</span>
-            </a>
-            <div class="proj-cat">Web Development · Healthcare &amp; Dental</div>
-            <h3><a href="https://smile-book-pro.vercel.app/" target="_blank" rel="noopener">Dental Clinic Website</a></h3>
-            <p>Online appointment booking, treatment pages and patient enquiry automation.</p>
-            <div class="tags"><span class="tag line">Website Development</span><span class="tag line">Appointment Booking</span><span class="tag line">SEO Setup</span><span class="tag line">Lead Automation</span></div>
-            <div class="stack">Next.js · Booking API · GA4</div>
-            <a href="https://smile-book-pro.vercel.app/" target="_blank" rel="noopener" class="link-arrow proj-link">View Project <span>↗</span></a>
-          </article>
-
-          <article class="proj" data-cat="systems ai">
-            <a class="proj-media" href="https://smart-garage-flow.vercel.app" target="_blank" rel="noopener" aria-label="View Avento GarageOS project">
-              <div class="frame-bar"><i></i><i></i><i></i></div>
-              <div class="shot"><img src="/images/shots/garage.webp" alt="Avento GarageOS garage management system" loading="lazy" width="1440" height="900" /></div>
-              <span class="view">View Project ↗</span>
-            </a>
-            <div class="proj-cat">Business Systems · Automotive / Car Garage</div>
-            <h3><a href="https://smart-garage-flow.vercel.app" target="_blank" rel="noopener">Avento GarageOS</a></h3>
-            <p>A garage management system for customers, vehicles, service history, jobs, invoices, appointments and inventory, with AI automation for service reminders, follow-ups and customer reactivation.</p>
-            <div class="tags"><span class="tag line">Garage Management System</span><span class="tag line">Customer &amp; Vehicle CRM</span><span class="tag line">Jobs &amp; Invoicing</span><span class="tag line">Appointments &amp; Inventory</span><span class="tag line">AI Automation</span></div>
-            <div class="stack">Next.js · React · PostgreSQL · AI</div>
-            <a href="https://smart-garage-flow.vercel.app" target="_blank" rel="noopener" class="link-arrow proj-link">View Project <span>↗</span></a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- SOCIAL MEDIA -->
-    <section class="section surface">
-      <div class="container social-grid">
-        <div>
-          <span class="eyebrow">Social Media Handling</span>
-          <h2 class="h2 reveal" style="margin:16px 0 20px">We help you grow your social media and turn it into leads</h2>
-          <p class="lead reveal d1">Beyond websites, we run and grow your business social accounts end to end: content, engagement, ads and automated DM handling, so your pages bring in real enquiries.</p>
-          <div class="mini-cards">
-            <div class="mini-card reveal"><h3>Content &amp; Page Management</h3><p>Daily posts, reels, stories and branded creatives, planned, designed and published for you.</p></div>
-            <div class="mini-card reveal d1"><h3>Audience Growth</h3><p>Hashtag, SEO and engagement strategy that grows real, local, buying-intent followers.</p></div>
-            <div class="mini-card reveal"><h3>DM &amp; Comment Handling</h3><p>Every enquiry answered fast with AI-assisted replies, then routed straight to your sales team.</p></div>
-            <div class="mini-card reveal d1"><h3>Lead Generation &amp; Ads</h3><p>Meta and Instagram ad funnels with tracked leads flowing directly into your CRM or WhatsApp.</p></div>
-          </div>
-          <div class="stats" style="border-top:1px solid var(--line-2)">
-            <div class="stat"><b>3x</b><span>Avg. engagement lift</span></div>
-            <div class="stat"><b>24/7</b><span>DM response cover</span></div>
-            <div class="stat"><b>100%</b><span>Leads tracked</span></div>
-          </div>
-          <div class="channels"><span class="tag line">Instagram</span><span class="tag line">Meta Ads</span><span class="tag line">Website</span></div>
-        </div>
-
-        <div class="reveal d1">
-          <div class="phone">
-            <div class="phone-screen">
-              <div class="phone-status"><span>9:41</span><span>100%</span></div>
-              <div class="phone-title"><b>Leads Inbox</b><span class="live">Live</span></div>
-              <div class="bubble"><small>New enquiry · Instagram DM</small>Hi! I saw your reel — what are your prices?</div>
-              <p class="mono" style="font-size:11px;color:var(--muted);margin:0 0 6px">AI replying automatically</p>
-              <ul class="steps-mini" data-sequence="li" data-interval="800">
-                <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg></span><div>AI qualifying lead…<small>Analysing intent</small></div></li>
-                <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg></span><div>Qualified lead<small>Score 92 / 100</small></div></li>
-                <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg></span><div>Added to CRM<small>Owner assigned</small></div></li>
-                <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg></span><div>WhatsApp follow-up sent<small>Delivered · 2s</small></div></li>
-                <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg></span><div>Email sequence started<small>3-step nurture</small></div></li>
-                <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg></span><div>Appointment booked<small>Tomorrow, 11:00</small></div></li>
-                <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg></span><div>Sales team notified<small>Qualified lead ready</small></div></li>
-              </ul>
+<body>
+<header class="nav nav--centre">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <a class="nav__logo" href="/" aria-label="Avento AI home"><img src="/images/logo.png" alt="" width="40" height="28"><span class="nav__name">Avento AI</span></a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item">
+        <a class="nav__link" href="/services/">Services <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav__menu">
+          <div class="wrap grid">
+            <div class="menu-col span-3">
+              <p class="t-label">Automation</p>
+              <a href="/services/#ai-automation">AI Automation<span>Chatbots, WhatsApp and follow-ups</span></a>
+              <a href="/services/#business-systems">Business Systems<span>CRMs, dashboards and portals</span></a>
             </div>
-          </div>
-          <p class="phone-caption">Social enquiry → AI qualification → CRM → follow-up → sales notified</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- MORE OF WHAT WE DO -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">More of what we do</span>
-            <h2 class="h2 reveal">Design and automation work behind the projects</h2>
-          </div>
-          <p class="lead reveal d1">Every build is backed by two disciplines: considered interface design, and automation that removes manual work.</p>
-        </div>
-        <div class="disc-grid">
-          <div class="disc reveal">
-            <span class="eyebrow">UI/UX Design</span>
-            <h3>Interfaces designed around conversion</h3>
-            <p>We map the customer journey first, then design accessible screens with a real design system: colour tokens, a typography scale and reusable components.</p>
-            <ul class="checks two">
-              <li>Wireframes &amp; user flows</li><li>Design systems &amp; style guides</li><li>Website &amp; app UI design</li>
-              <li>Mobile-first responsive layouts</li><li>Prototypes &amp; handoff files</li><li>Conversion &amp; usability audits</li>
-            </ul>
-          </div>
-          <div class="disc reveal d1">
-            <span class="eyebrow">AI Automation</span>
-            <h3>Workflows that qualify and follow up for you</h3>
-            <p>We connect your website, social channels, WhatsApp and CRM into one automated flow that replies instantly, qualifies, scores, saves and notifies.</p>
-            <ul class="checks two">
-              <li>AI chatbots &amp; assistants</li><li>WhatsApp &amp; Instagram automation</li><li>Lead scoring &amp; qualification</li>
-              <li>CRM &amp; email automation</li><li>Automated follow-up sequences</li><li>API &amp; workflow integrations</li>
-            </ul>
+            <div class="menu-col span-3">
+              <p class="t-label">Online presence</p>
+              <a href="/services/#web-development">Web Development<span>Websites, stores and landing pages</span></a>
+              <a href="/services/#digital-solutions">Digital Solutions<span>SEO, Google Business and email</span></a>
+            </div>
+            <a class="menu-card span-3 start-10" href="/work/">
+              <div class="panel"><img class="frame__img" src="/images/shots/garage.webp" alt="Avento GarageOS, a garage management system"></div>
+              <span class="t-card">Avento GarageOS</span>
+              <span class="t-small muted">Our newest system, for car garages</span>
+            </a>
           </div>
         </div>
       </div>
-    </section>
+      <div class="nav__item"><a class="nav__link" href="/work/" aria-current="page">Work</a></div>
+      <div class="nav__item"><a class="nav__link" href="/about/">About</a></div>
+      <div class="nav__item"><a class="nav__link" href="/#faq">Questions</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--primary" href="/about/#contact">Book a free audit</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
 
-    <section class="section" style="padding-top:0">
-      <div class="container">
-        <div class="cta-band reveal">
-          <div>
-            <span class="eyebrow">Next step</span>
-            <h2>Want results like these?</h2>
-            <p>Tell us what you are building and we will show you how we would approach it.</p>
-          </div>
-          <div class="btns">
-            <a href="/about/#contact" class="btn btn-white">Start Your Project <span class="arr">→</span></a>
-            <a href="/about/#contact" class="btn btn-ghost-light">Contact Us</a>
+<main id="top">
+  <section class="hero hero--split" data-enter aria-labelledby="hero-h">
+    <div class="wrap">
+      <div class="hero-text grid hero-split">
+        <div class="hero-copy span-5">
+          <p class="hero-notice">Our work</p>
+          <h1 id="hero-h">Websites, stores and AI systems we have built</h1>
+          <p class="t-lead">Explore the websites, digital platforms and automation we have created for real estate, retail, hospitality, healthcare and garages. Every project below is live.</p>
+          <div class="btn-row">
+            <a class="btn btn--primary" href="/about/#contact">Book a free audit<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+            <a class="btn btn--secondary" href="#projects">See all projects</a>
           </div>
         </div>
+        <div class="hero-visual span-7 start-6"><div class="shotwin"><div class="shot-bar"><span class="d-win__dots"><i></i><i></i><i></i></span><span>smart-garage-flow.vercel.app</span></div><img class="shotwin__img" src="/images/shots/garage.webp" alt="Avento GarageOS, a garage management system built by Avento AI" loading="lazy" decoding="async" width="1440" height="900" data-source="client" data-subject="website"></div></div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+  <section class="section" id="projects" style="--h: 2" aria-labelledby="projects-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="projects-h">Seven live projects</h2>
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter" type="button" data-filter="web" aria-pressed="false">Web</button>
+          <button class="filter" type="button" data-filter="ai" aria-pressed="false">AI Automation</button>
+          <button class="filter" type="button" data-filter="ecom" aria-pressed="false">E-commerce</button>
+          <button class="filter" type="button" data-filter="systems" aria-pressed="false">Systems</button>
+          <button class="filter" type="button" data-filter="uiux" aria-pressed="false">UI/UX</button>
+        </div>
+      </div>
+      <div class="grid proj-grid">
+        <a class="card card--row card--open span-4 proj" data-cat="web" href="https://luxury-real-estate-showcase-lemon.vercel.app/" target="_blank" rel="noopener">
+          <p class="t-label muted">Web Development · Real Estate</p>
+          <h3>Prime Property website</h3>
+          <p>A real estate platform built to showcase premium properties and generate qualified leads.</p>
+          <div class="panel"><img class="frame__img" src="/images/shots/realestate.webp" alt="Prime Property, built by Avento AI" loading="lazy" decoding="async" width="1440" height="900" data-source="client" data-subject="website"></div>
+          <p class="proj__stack">React · Next.js · CRM API</p>
+        </a>
+        <a class="card card--row card--open span-4 proj" data-cat="ecom" href="https://fashion-ecommerce-store-eight.vercel.app/" target="_blank" rel="noopener">
+          <p class="t-label muted">E-commerce · Retail and Fashion</p>
+          <h3>Modern E-commerce Store</h3>
+          <p>A high-converting online store with a modern, responsive shopping experience.</p>
+          <div class="panel"><img class="frame__img" src="/images/shots/ecommerce.webp" alt="Modern E-commerce Store, built by Avento AI" loading="lazy" decoding="async" width="1440" height="900" data-source="client" data-subject="website"></div>
+          <p class="proj__stack">Shopify · Stripe · Liquid</p>
+        </a>
+        <a class="card card--row card--open span-4 proj" data-cat="ai" href="https://realsupport-ai.vercel.app/" target="_blank" rel="noopener">
+          <p class="t-label muted">AI Automation · Customer Experience</p>
+          <h3>AI Customer Support system</h3>
+          <p>An AI support system that responds to customers and collects leads automatically.</p>
+          <div class="panel"><img class="frame__img" src="/images/shots/ai-support.webp" alt="AI Customer Support, built by Avento AI" loading="lazy" decoding="async" width="1440" height="900" data-source="client" data-subject="website"></div>
+          <p class="proj__stack">OpenAI · Python · WhatsApp API</p>
+        </a>
+        <a class="card card--row card--open span-4 proj" data-cat="systems" href="https://real-showcase.vercel.app/" target="_blank" rel="noopener">
+          <p class="t-label muted">Business Systems · Operations</p>
+          <h3>Business Dashboard system</h3>
+          <p>A custom dashboard for managing customers, analytics and daily operations.</p>
+          <div class="panel"><img class="frame__img" src="/images/shots/dashboard.webp" alt="Business Dashboard, built by Avento AI" loading="lazy" decoding="async" width="1440" height="900" data-source="client" data-subject="website"></div>
+          <p class="proj__stack">React · Node.js · PostgreSQL</p>
+        </a>
+        <a class="card card--row card--open span-4 proj" data-cat="uiux web" href="https://restaurant-website-zeta-rosy.vercel.app/" target="_blank" rel="noopener">
+          <p class="t-label muted">UI/UX · Hospitality</p>
+          <h3>Restaurant Website</h3>
+          <p>A restaurant website with menu display, reservations and location integration.</p>
+          <div class="panel"><img class="frame__img" src="/images/shots/restaurant.webp" alt="Restaurant Website, built by Avento AI" loading="lazy" decoding="async" width="1440" height="900" data-source="client" data-subject="website"></div>
+          <p class="proj__stack">React · Maps API · Reservations</p>
+        </a>
+        <a class="card card--row card--open span-4 proj" data-cat="web" href="https://smile-book-pro.vercel.app/" target="_blank" rel="noopener">
+          <p class="t-label muted">Web Development · Healthcare and Dental</p>
+          <h3>Dental Clinic Website</h3>
+          <p>Online appointment booking, treatment pages and patient enquiry automation.</p>
+          <div class="panel"><img class="frame__img" src="/images/shots/dentist.webp" alt="Dental Clinic Website, built by Avento AI" loading="lazy" decoding="async" width="1440" height="900" data-source="client" data-subject="website"></div>
+          <p class="proj__stack">Next.js · Booking API · GA4</p>
+        </a>
+        <a class="card card--row card--open span-8 proj proj--wide" data-cat="systems ai" href="https://smart-garage-flow.vercel.app/" target="_blank" rel="noopener">
+          <p class="t-label muted">Business Systems · Car Garages</p>
+          <h3>Avento GarageOS system</h3>
+          <p>Customers, vehicles, jobs, invoices, appointments and stock in one system, with AI reminders and follow-ups.</p>
+          <div class="panel"><img class="frame__img" src="/images/shots/garage.webp" alt="Avento GarageOS, built by Avento AI" loading="lazy" decoding="async" width="1440" height="900" data-source="client" data-subject="website"></div>
+          <p class="proj__stack">Next.js · React · PostgreSQL · AI</p>
+        </a>
+        <a class="card card--row card--open span-4 proj proj--next" data-cat="web ai ecom systems uiux" href="/about/#contact">
+          <p class="t-label muted">Your business · Dubai</p>
+          <h3>Your project next</h3>
+          <p>Tell us what you want to build. We reply with a clear plan, usually within one business day.</p>
+          <div class="panel"><div class="next-tools" aria-hidden="true">
+            <span class="ic-tile"><img class="ic" src="/assets/icons/whatsapp.svg" alt="" width="28" height="28"></span>
+            <span class="ic-tile"><img class="ic" src="/assets/icons/shopify.svg" alt="" width="28" height="28"></span>
+            <span class="ic-tile"><img class="ic" src="/assets/icons/openai.svg" alt="" width="28" height="28"></span>
+            <span class="ic-tile"><img class="ic" src="/assets/icons/instagram.svg" alt="" width="28" height="28"></span>
+            <span class="ic-tile"><img class="ic" src="/assets/icons/google-sheets.svg" alt="" width="28" height="28"></span>
+            <span class="ic-tile"><img class="ic" src="/assets/icons/slack.svg" alt="" width="28" height="28"></span>
+          </div></div>
+          <p class="proj__stack">Start with a free audit</p>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="section ground-surface" id="social" aria-labelledby="social-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-6">
+          <p class="t-label muted">Social media handling</p>
+          <h2 id="social-h">Social media that turns followers into leads</h2>
+          <p class="t-lead" style="margin-top:var(--s-5)">Beyond websites, we run and grow your business accounts end to end, so your pages bring in real enquiries, tracked from the first DM.</p>
+          <ul class="checks2"><li><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span>Content and page management</span></li><li><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span>Daily posts, reels and stories</span></li><li><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span>Audience growth strategy</span></li><li><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span>Hashtag and local SEO</span></li><li><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span>DM and comment handling</span></li><li><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span>AI-assisted replies</span></li><li><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span>Meta and Instagram ads</span></li><li><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span>Leads sent to CRM or WhatsApp</span></li></ul>
+        </div>
+        <div class="split-visual span-6 start-7"><div class="panel"><div class="stage stage--fade-b"><div class="at-rise fit" style="--fit-max:420px;--ax:max(24px, 50% - 210px);--ay:48px;--ay-sm:20px" data-ui-loop>
+  <div class="ui ui-panel ui-checks" data-ui="checklist">
+    <div class="ui-checks__head"><div class="ui-title">Leads inbox · Instagram DM</div><span class="ui-spacer"></span><div class="ui-meta" data-checks-count>2 of 6</div></div>
+    <div class="ui-checks__bar"><i data-checks-bar style="--k:0.33"></i></div>
+    <ul class="ui-checks__list">
+      <li class="ui-check is-done"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span class="ui-check__label">New enquiry: "What are your prices?"</span></li>
+      <li class="ui-check is-done"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span class="ui-check__label">Qualified lead, score 92 of 100</span></li>
+      <li class="ui-check"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span class="ui-check__label">Added to the CRM, owner assigned</span></li>
+      <li class="ui-check"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span class="ui-check__label">WhatsApp follow-up delivered in 2 s</span></li>
+      <li class="ui-check"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span class="ui-check__label">Appointment booked, tomorrow 11:00</span></li>
+      <li class="ui-check"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span><span class="ui-check__label">Sales team notified</span></li>
+    </ul>
+  </div>
+</div></div></div></div>
+      </div>
+    </div>
+  </section>
+</main>
 
-  <!-- @footer -->
+<footer class="footer closing footer--statement" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--type">
+      <div class="section-head">
+        <h2 id="close-h">Want results like these?</h2>
+        <p>Tell us what you are building and we show you how we would approach it.</p>
+      </div>
+      <a class="btn btn--primary btn--xl btn--wide" href="/about/#contact">Book a free audit<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo" href="/"><img src="/images/logo.png" alt="" width="40" height="28">Avento AI</a>
+          <p class="footer__lede">Automation, websites and systems from Dubai.</p>
+        </div>
+        <div class="span-2 footer__col"><h3>Services</h3><ul><li><a href="/services/#ai-automation">AI Automation</a></li><li><a href="/services/#web-development">Web Development</a></li><li><a href="/services/#business-systems">Business Systems</a></li><li><a href="/services/#digital-solutions">Digital Solutions</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Work</h3><ul><li><a href="/work/">All projects</a></li><li><a href="/work/#social">Social media</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Company</h3><ul><li><a href="/about/">About us</a></li><li><a href="/about/#contact">Contact</a></li><li><a href="/#faq">Questions</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Contact</h3><ul><li><a href="mailto:hello@aventoai.agency">hello@aventoai.agency</a></li><li>Dubai, UAE</li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Avento AI Solutions &nbsp; <a href="/privacy/">Privacy</a> &nbsp; <a href="/terms/">Terms</a></span>
+        <div class="socials">
+          <a href="https://www.instagram.com/avento.ai_agency/" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.facebook.com/profile.php?id=61593683226327&amp;sk=directory_contact_info" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.6V21h3z"/></svg></a>
+          <a href="https://github.com/aventoai-solutions" aria-label="GitHub" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg></a>
+        </div>
+        <span class="t-small muted">Product names and logos are trademarks of their owners.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+<script type="module" src="/assets/system.js"></script>
+<script type="module" src="/assets/motion/motion.js"></script>
+<script type="module" src="/assets/layout/layout.js"></script>
+<script type="module" src="/assets/diagrams/mount.js"></script>
+<script>
+document.querySelectorAll('.filter').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.filter').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  const f = b.dataset.filter;
+  document.querySelectorAll('.proj').forEach(p => p.classList.toggle('is-hidden', f !== 'all' && !p.dataset.cat.split(' ').includes(f)));
+}));
+</script>
 </body>
 </html>

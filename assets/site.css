@@ -1,0 +1,21 @@
+/* Avento AI: site-wide additions to the kit (system.css and friends stay untouched).
+   1. Page transitions between pages (cross-document View Transitions, Chrome, Edge, Safari 18+).
+      Browsers without them simply load the next page. Under reduced motion nothing animates. */
+@view-transition { navigation: auto; }
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) { animation: av-out 280ms cubic-bezier(.4, 0, 1, 1) both; }
+  ::view-transition-new(root) { animation: av-in 520ms cubic-bezier(.22, 1, .36, 1) both; }
+  /* the bar stays put while the page under it changes */
+  .nav { view-transition-name: av-nav; }
+  ::view-transition-old(av-nav), ::view-transition-new(av-nav) { animation: none; }
+}
+@keyframes av-out { to { opacity: 0; transform: translateY(-12px); filter: blur(2px); } }
+@keyframes av-in { from { opacity: 0; transform: translateY(24px); } }
+
+/* 2. The client's own logo in the bar, the footer and the hero headline */
+.nav__logo img { height: 26px; width: auto; }
+.av-mark { display: inline-block; height: .78em; width: auto; vertical-align: -.04em; margin-inline: .04em .12em; }
+
+/* 3. A very small phone (under 380px) shows the mark alone in the bar, so the main action and the menu still fit */
+@media (max-width: 379px) { .nav__bar .nav__name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } }
